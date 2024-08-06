@@ -1,58 +1,5 @@
 # ANGLE - Almost Native Graphics Layer Engine
 
-## Vita version
-
-This is a port of ANGLE that runs on the Playstation Vita via [PVR_PSP2](https://github.com/GrapheneCt/PVR_PSP2)
-
-### Compiling
-
-To compile this port for use with vitasdk, do the following in the project root:
-
-```
-cmake .
-make -j8
-```
-
-Then, you'll have to copy liblibGLESv2.a to (VITASDK)/arm-vita-eabi/lib/
-You'll also have to copy the include/GLES2 folder into (VITASDK)/arm-vita-eabi/include/angle/ (make a folder called angle there)
-
-### Usage
-
-Remove the includes to GLES2 from PVRPSP2, if you have any
-
-My includes look like this as an example:
-```
-#include <angle/GLES2/gl2.h>
-#include <angle/GLES2/gl2ext.h>
-#include <EGL/eglplatform.h>
-#include <EGL/egl.h>
-#include <gpu_es4/psp2_pvr_hint.h>
-```
-
-
-To use it inside your project link the following libraries:
-
-```
-liblibGLESv2.a
-liblibIMGEGL_stub.a
-liblibgpu_es4_ext_stub.a
-```
-
-Then, initialize PVR_PSP2 and EGL as usual. 
-After the EGL context is created, call `glInitAngle(0, 0, 0);` before any GLES2 call.
-
-## VPK
-The vpk should include:
-```
-libGLESv2.suprx
-libgpu_es4_ext.suprx
-libIMGEGL.suprx
-libpvrPSP2_WSEGL.suprx
-```
-Make sure these files are from [PVR_PSP2 Version 3.5](https://github.com/GrapheneCt/PVR_PSP2/releases/tag/v3.5) if you have issues with the latest release of PVR_PSP2.
-
-# About the original project
-
 The goal of ANGLE is to allow users of multiple operating systems to seamlessly run WebGL and other
 OpenGL ES content by translating OpenGL ES API calls to one of the hardware-supported APIs available
 for that platform. ANGLE currently provides translation from OpenGL ES 2.0 and 3.0 to desktop
